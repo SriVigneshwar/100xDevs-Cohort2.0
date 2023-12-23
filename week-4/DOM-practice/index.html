@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <script>
+        function populateDiv(){
+            const a = document.getElementById('firstNumber').value;
+            const b = document.getElementById('secondNumber').value;
+            const element = document.getElementById('fianlSum');
+            //element.innerHTML = parseInt(a) + parseInt(b);
+
+            fetch('https://sum-server.100xdevs.com/sum?a=' + a + '&b=' + b).then(
+                (response) => {
+                    response.text().then((ans)=>{
+                        element.innerHTML = ans;
+                    })
+                }
+            );
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="firstNumber" placeholder="first number"><br></br>
+    <input type="text" id="secondNumber" placeholder="second number"><br></br>
+    <button onclick="populateDiv()">Calculate Sum</button><br></br>
+    <div id ="fianlSum"></div>
+</body>
+</html>
