@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="title" placeholder="title"/><br><br>
+        <input type="text" id="description" placeholder="description"/> <br><br>
+        <button onclick="">Add todo</button><br><br>
+        <div id="container"></div>
+    </div>
+
+    <script>
+        let globalid = 1;
+
+        function markAsDone(todoid){
+            const todoDone = document.getElementById(todoid);
+            todoDone.children[2].innerHTML = "Done!";
+        }
+
+        function createChild(title, description, id){
+            const child = document.createElement('div');
+            const grandchild = document.createElement('div');
+            grandchild.innerHTML = title;
+            const secondGrandChild = document.createElement('div');
+            secondGrandChild.innerHTML = description;
+            const thirdGrandChild = document.createElement('button');
+            thirdGrandChild.innerHTML = 'Mark as done';
+            thirdGrandChild.setAttribute('onclick', `markAsDone(${id})`);
+            child.appendChild(grandchild);
+            child.appendChild(secondGrandChild);
+            child.appendChild(thirdGrandChild);
+            child.setAttribute('id', id);
+
+            return child;
+        }
+
+        function updateDOMonState(state){
+            const parent = document.getElementById('container');
+            parent.innerHTML = '';
+
+            for(let i=0; i < state.length; i++){
+                const child = createChild(state[i].title, state[i].description, state[i].id);
+                parent.appendChild(child);
+            }
+        }
+
+        window.setInterval(async function(){
+            let response = await fetch('https://sum-server.100xdevs.com/todos');
+            const json = await response.json();
+            updateDOMonState(json.todos);
+        }, 5000);
+    </script>
+</body>
+</html>
