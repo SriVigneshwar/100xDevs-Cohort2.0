@@ -1,14 +1,17 @@
 const express = require('express');
 const { createtodo, updateTodo } = require('./types');
 const { todo } = require('./db');
+const cors = require('cors');
 const app = express();
 
+app.use(cors({
+    origin: "http://localhost:5173"
+}));
 app.use(express.json());
 
 app.post('/todo', async function(req, res){
     const createPayload = req.body;
     const parsePayload = createtodo.safeParse(createPayload);
-
     if(!parsePayload.success){
         res.status(411).json({
             msg: 'You sent wrong inputs'
@@ -17,11 +20,15 @@ app.post('/todo', async function(req, res){
     }
     // put it in mongoDB
 
-    await todo.Create({
+    await todo.create({
         title: createPayload.title,
         description: createPayload.description,
         completed: false
     });
+
+    res.json({
+        msg: 'todo added'
+    })
 });
 
 app.get('/todos', async function(req, res){
@@ -44,14 +51,14 @@ app.put('/completed',async function(req, res){
         return;
     }
 
-    await todo.update({
+    await todo.findOneAndUpdate({
         _id: req.body.id
     },{
         completed: true
     });
 
     res.json({
-        msg: 'To marked as completed'
+        msg: 'Todo marked as completed'
     });
 });
 
