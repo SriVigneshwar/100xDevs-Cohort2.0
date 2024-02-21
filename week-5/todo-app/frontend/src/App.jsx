@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { CreateTodo } from './components/CreateTodo'
 import {Todos} from './components/Todos'
+import { BusinessCard } from './components/BusinessCard';
 
 function App() {
 
