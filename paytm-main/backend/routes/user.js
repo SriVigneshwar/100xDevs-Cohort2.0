@@ -27,6 +27,14 @@ const updateBody = zod.object({
     lastName: zod.string().optional()
 });
 
+router.get('/me', authMiddleware, (req, res) =>{
+    if(req.userId){
+        res.json({
+            msg: 'Authed user!'
+        });
+    }
+});
+
 router.post('/signup', async (req, res)=>{
     const {success} = signupBody.safeParse(req.body);
 
