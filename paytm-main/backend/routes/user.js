@@ -27,12 +27,21 @@ const updateBody = zod.object({
     lastName: zod.string().optional()
 });
 
-router.get('/me', authMiddleware, (req, res) =>{
+router.get('/me', authMiddleware,async (req, res) =>{
     if(req.userId){
-        res.json({
-            msg: 'Authed user!'
+        const user = await User.findOne({
+            _id: req.userId
+         });
+        return res.json({
+            msg: 'Authed user!',
+            firstName: user.firstName,
+            lastName: user.lastName,
+            userId : req.userId
         });
     }
+    return res.status(411).json({
+        msg: 'Unauthed User'
+    });
 });
 
 router.post('/signup', async (req, res)=>{
