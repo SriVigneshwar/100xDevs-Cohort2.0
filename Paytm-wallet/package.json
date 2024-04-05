@@ -1,5 +1,5 @@
 {
-  "name": "turbo-repo",
+  "name": "Paytm-wallet",
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -8,21 +8,13 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "prettier": "^3.2.5",
     "turbo": "latest"
   },
+  "packageManager": "pnpm@8.9.0",
   "engines": {
     "node": ">=18"
-  },
-  "packageManager": "npm@10.5.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
-  "dependencies": {
-    "@types/express": "^4.17.21",
-    "express": "^4.18.3"
   }
 }
