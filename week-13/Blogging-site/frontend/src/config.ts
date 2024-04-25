@@ -1,0 +1,1 @@
+export const BACKEND_URL = "https://backend.srivignesh2416.workers.dev/api/v1";
