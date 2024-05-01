@@ -3,7 +3,7 @@ import { Blog } from "../hooks";
 
 export const BlogContent = ({blog} : {blog: Blog}) =>{
     return(
-        <div className="flex justify-center h-screen">
+        <div className="flex justify-center max-h-fit">
             <div key={blog.id} className="grid grid-cols-12 space-x-2 px-10 w-full pt-12 max-w-screen-2xl">
                 <div className="col-span-8">
                     <div className=" text-5xl font-extrabold">
@@ -26,7 +26,7 @@ export const BlogContent = ({blog} : {blog: Blog}) =>{
                         </div>
                         <div>
                             <div className="text-3xl font-bold pb-3">
-                                {blog.author.name}
+                                {blog.author.name  || "Anonymous"}
                             </div>
                             <div className="font-base text-lg text-slate-500">
                                 A catchy phrase about the author's ability to write blogs.
