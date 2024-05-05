@@ -20,14 +20,14 @@ export const Auth = ({type} : {type: 'signup' | 'signin'}) =>{
             localStorage.setItem('token', jwt.jwt);
             navigate('/blogs');
         }catch(e){
-            alert('Error while Signing in');
+            alert('Incorrect Inputs/Error while Signing in');
         }
     }
 
     return (
         <div className="h-screen flex flex-col justify-center">
             <div className="flex justify-center ">
-                <div>
+                <form>
                     <div className="px-10 py-3">
                         <div className="text-3xl font-extrabold">
                             Create an account
@@ -64,7 +64,7 @@ export const Auth = ({type} : {type: 'signup' | 'signin'}) =>{
                         <button type="button" onClick={sendRequest} className="w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none 
                         focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 my-2">{type === "signup" ? "Sign up": "Sign in"}</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     )
@@ -81,7 +81,7 @@ function LabelledInput({label, placeholder, onChange, type} : LabelledInputType)
     return (
         <div className="my-4">
             <label className="block mb-2 text-sm font-semibold text-black">{label}</label>
-            <input onChange={onChange} type={type || "text"} className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder={placeholder} required />
+            <input onChange={onChange} type={type || "text"} className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder={placeholder} required={true} />
         </div>
     )
 }
